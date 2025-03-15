@@ -5,7 +5,6 @@ pipeline {
     IMAGE_NAME = "amineznaki/password-generator:latest"
     VM_USER = "aznaki"
     VM_IP = "192.168.18.130"
-    SSH_KEY_CREDENTIALS_ID = "ssh-credentials-id"
     }
 
     stages {
@@ -34,7 +33,7 @@ pipeline {
         }
         stage ('Deploy on CentOS VM') {
             steps {
-            withCredentials([sshUserPrivateKey(credentialsId: "$SSH_KEY_CREDENTIALS_ID", keyFileVariable: 'SSH_KEY')]) {
+            withCredentials([sshUserPrivateKey(credentialsId: "ssh-credentials-id", variable: 'SSH_KEY')]) {
             sh """
             ssh -i $SSH_KEY $VM_USER@$VM_IP << EOF
             docker pull $IMAGE_NAME
