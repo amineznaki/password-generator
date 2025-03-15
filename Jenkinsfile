@@ -33,7 +33,7 @@ pipeline {
         }
         stage ('Deploy on CentOS VM') {
             steps {
-            withCredentials([sshUserPrivateKey(credentialsId: "ssh-credentials-id", variable: 'SSH_KEY')]) {
+            withCredentials([sshUserPrivateKey(credentialsId: "ssh-credentials-id", keyFileVariable: 'SSH_KEY')]) {
             sh """
             ssh -i "$SSH_KEY" $VM_USER@$VM_IP << EOF
             docker pull $IMAGE_NAME
