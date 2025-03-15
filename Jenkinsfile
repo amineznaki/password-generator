@@ -35,7 +35,7 @@ pipeline {
             steps {
             withCredentials([sshUserPrivateKey(credentialsId: "ssh-credentials-id", variable: 'SSH_KEY')]) {
             sh """
-            ssh -i $SSH_KEY $VM_USER@$VM_IP << EOF
+            ssh -i "$SSH_KEY" $VM_USER@$VM_IP << EOF
             docker pull $IMAGE_NAME
             docker stop password-generator || true
             docker rm password-generator || true
