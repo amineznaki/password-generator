@@ -11,7 +11,7 @@ pipeline {
     stages {
         stage ('Clone Repository') {
             steps {
-            git 'https://github.com/amineznaki/password-generator.git'
+            git url: 'https://github.com/amineznaki/password-generator.git', branch: 'main'
             }
         }
         stage ('Build Docker Image') {
