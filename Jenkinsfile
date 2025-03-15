@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-    IMAGE_NAME = "amineznaki/password-generator"
+    IMAGE_NAME = "password-generator"
     VM_USER = "aznaki"
     VM_IP = "192.168.18.130"
     SSH_KEY_CREDENTIALS_ID = "ssh-credentials-id"
@@ -12,12 +12,12 @@ pipeline {
         stage ('Clone Repository') {
             steps {
             git url: 'https://github.com/amineznaki/password-generator.git', branch: 'main'
-            sh "git checkout main"
+            powershell "git checkout main"
             }
         }
         stage ('Build Docker Image') {
             steps {
-            sh "docker build -t IMAGE_NAME ."
+            sh "docker build -t $IMAGE_NAME ."
             }
         }
         stage ('Login Dockerhub') {
