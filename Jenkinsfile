@@ -33,17 +33,17 @@ pipeline {
         }
         stage ('Deploy on CentOS VM') {
             steps {
-            withCredentials([sshUserPrivateKey(credentialsId: "ssh-credentials-id", keyFileVariable: 'SSH_KEY')]) {
-            sh """
-            ssh -i "$SSH_KEY" $VM_USER@$VM_IP << EOF
-            docker pull $IMAGE_NAME
-            docker stop password-generator || true
-            docker rm password-generator || true
-            docker run -d --name password-generator -p 3000:3000
-            EOF
-            """
+                withCredentials([sshUserPrivateKey(credentialsId: "ssh-credentials-id", keyFileVariable: 'SSH_KEY')]) {
+                    sh """
+                    ssh -o StrictHostKeyChecking=no -i "$SSH_KEY" $VM_USER@$VM_IP << EOF
+                        docker pull $IMAGE_NAME
+                        docker stop password-generator || true
+                        docker rm password-generator || true
+                        docker run -d --name password-generator -p 3000:3000 $IMAGE_NAME
+                    EOF
+                    """
+                }
             }
-           }
         }
     }
 }
