@@ -1,4 +1,13 @@
-FROM ubuntu:latest
-LABEL authors="Amineznaki"
+FROM node:16
 
-ENTRYPOINT ["top", "-b"]
+WORKDIR /app
+
+COPY package*.json ./
+
+RUN npm install
+
+COPY . .
+
+EXPOSE 3000
+
+CMD ["npm","start"]
