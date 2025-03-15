@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-    IMAGE_NAME = "password-generator"
+    IMAGE_NAME = "amineznaki/password-generator:latest"
     VM_USER = "aznaki"
     VM_IP = "192.168.18.130"
     SSH_KEY_CREDENTIALS_ID = "ssh-credentials-id"
