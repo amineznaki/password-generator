@@ -1,4 +1,6 @@
-/node_modules
+Dockerfile
+Jenkinsfile
+node_modules
+*.log
 .env
 .git
-
